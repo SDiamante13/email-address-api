@@ -14,5 +14,4 @@ class EmailAddressController(val emailAddressService: EmailAddressService) {
     fun getEmailAddressCount(@RequestBody request: Request): Response {
         return Response(emailAddressService.getCount(request.emailAddresses))
     }
-
 }

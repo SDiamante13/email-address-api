@@ -6,13 +6,15 @@ import org.springframework.stereotype.Service
 class EmailAddressService {
 
     fun filterEmails(emailAddresses: List<String>): List<String> {
-        return emailAddresses.map { emailAddress ->
-            emailAddress
-                    .ignoreDecimalInUsername()
-                    .addDomainExtensionBack(emailAddress)
-                    .ignoreTextAfterPlus()
-                    .addDomainExtensionBack(emailAddress)
-        }
+        return emailAddresses
+                .filter { it.contains("@") }
+                .map { emailAddress ->
+                    emailAddress
+                            .ignoreDecimalInUsername()
+                            .addDomainExtensionBack(emailAddress)
+                            .ignoreTextAfterPlus()
+                            .addDomainExtensionBack(emailAddress)
+                }
     }
 
     fun getCount(emailAddresses: List<String>): Int {

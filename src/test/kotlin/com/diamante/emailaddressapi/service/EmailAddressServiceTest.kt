@@ -1,6 +1,6 @@
 package com.diamante.emailaddressapi.service
 
-import com.google.common.truth.Truth.*
+import com.google.common.truth.Truth.assertThat
 import io.mockk.every
 import io.mockk.spyk
 import org.junit.jupiter.api.Test
@@ -44,6 +44,17 @@ class EmailAddressServiceTest {
         val result = emailAddressService.filterEmails(emailAddresses)
 
         assertThat(result).isEqualTo(expectedEmailAddresses)
+    }
+
+    @Test
+    fun `filterEmails will drop any strings not containing @`() {
+        val emailAddresses = listOf(
+                "stevendiamante+gmail.com", "bobsmith@gmail.com")
+        val expectedEmailAddress = listOf("bobsmith@gmail.com")
+
+        val result = emailAddressService.filterEmails(emailAddresses)
+
+        assertThat(result).isEqualTo(expectedEmailAddress)
     }
 
     @Test
